@@ -13,11 +13,14 @@ class ItemsGroups {
     let groupId: Int
     let nameGroup: String
     let photo: String
+    let token: String
     
-    init(json: JSON) {
+    init(json: JSON, token: String) {
 
-        self.groupId = json["groups"]["id"].intValue
-        self.nameGroup = json["groups"]["name"].stringValue
-        self.photo = json["groups"]["photo_50"].stringValue
+        self.groupId = json["id"].intValue
+        self.nameGroup = json["name"].stringValue
+        self.photo = json["photo_50"].stringValue
+        
+        self.token = token
     }
 }

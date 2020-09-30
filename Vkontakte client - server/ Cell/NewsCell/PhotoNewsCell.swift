@@ -14,18 +14,19 @@ class PhotoNewsCell: UITableViewCell {
     
     @IBOutlet weak var imageAvatarNews: UIImageView!
     @IBOutlet weak var userNameNews: UILabel!
-    @IBOutlet weak var photoNews: UIImageView!
-    @IBOutlet weak var photoButtonView: VkButtons!
+    @IBOutlet private weak var photoNews: UIImageView!
+    @IBOutlet private weak var photoButtonView: VkButtons!
     
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func configure(with news: ItemsNews, ownerGroupNews: ItemsGroups?, ownerProfilesNews: ItemsProfiles?) {
+        
+        let urlPost = URL(string: news.photo)
+        photoNews.kf.setImage(with: urlPost)
+        photoButtonView.commentsLabel?.text = news.comments
+        photoButtonView.likeLabel?.text = news.likes
+        photoButtonView.repostLabel?.text = news.reposts
+        photoButtonView.viewingLabel?.text = news.views
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
+    
 
 }

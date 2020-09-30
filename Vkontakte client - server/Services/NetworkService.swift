@@ -117,12 +117,12 @@ class NetworkService {
         }
     }
     
-    func loadPostNews(completion: @escaping (VKNews) -> Void) {
+    func loadPostNews(token: String, completion: ((VKNews?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
             "access_token": Singleton.instance.token,
-            "filters": "post",
+            "filters": "post, photo",
             "count": 100,
             "v": versionAPI
         ]
@@ -141,29 +141,27 @@ class NetworkService {
                 let jsonParseGroup = DispatchGroup()
                 
                 DispatchQueue.global().async(group: jsonParseGroup) {
-                    postNews = json["response"]["items"].arrayValue.map { ItemsNews(json: $0) }
+                    postNews = json["response"]["items"].arrayValue.map { ItemsNews(json: $0, token: token) }
                     postNews.forEach { print($0.text) }
                 }
                 
                 DispatchQueue.global().async(group: jsonParseGroup) {
-                    postGroupsNews = json["response"]["groups"].arrayValue.map { ItemsGroups(json: $0) }
+                    postGroupsNews = json["response"]["groups"].arrayValue.map { ItemsGroups(json: $0, token: token) }
                     postGroupsNews.forEach { print($0.nameGroup) }
                 }
                 
                 DispatchQueue.global().async(group: jsonParseGroup) {
-                    postProfilesNews = json["response"]["profiles"].arrayValue.map { ItemsProfiles(json: $0) }
+                    postProfilesNews = json["response"]["profiles"].arrayValue.map { ItemsProfiles(json: $0, token: token) }
                     postProfilesNews.forEach { print($0.firstName + " " + $0.lastName ) }
                 }
                 
                 jsonParseGroup.notify(queue: DispatchQueue.main) {
                     let news = VKNews(items: postNews, profiles: postProfilesNews, groups: postGroupsNews)
-                    completion(news)
+                    completion?(news, nil)
                 }
-                //completion(postNews)
                 
             case .failure(let error):
-                print(error)
-                //completion([])
+                completion?(nil, error)
             }
         }
     }

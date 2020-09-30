@@ -13,16 +13,8 @@ class MyFriendsCell: UITableViewCell {
     
     static let reuseIdentifier = "MyFriendsCell"
     
-    @IBOutlet weak var friendsName: UILabel!
-    @IBOutlet weak var imageAvatar: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+    @IBOutlet private weak var friendsName: UILabel!
+    @IBOutlet private weak var imageAvatar: UIImageView!
     
     public func configure(with friend: User) {
         

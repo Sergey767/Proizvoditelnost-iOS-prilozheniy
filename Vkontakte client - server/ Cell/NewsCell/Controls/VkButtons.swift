@@ -10,7 +10,7 @@ import UIKit
 
 class VkButtons: UIControl {
     
-    @IBOutlet weak var likeButton: UIButton! {
+    @IBOutlet private weak var likeButton: UIButton! {
         didSet {
             let unlikedImage = UIImage(named: "like")
             self.likeButton.setImage(unlikedImage, for: .normal)
@@ -19,7 +19,7 @@ class VkButtons: UIControl {
     
     @IBOutlet weak var likeLabel: UILabel!
     
-    @IBOutlet weak var commentsButton: UIButton! {
+    @IBOutlet private weak var commentsButton: UIButton! {
         didSet {
             let commentsImage = UIImage(named: "comments")
             self.commentsButton.setImage(commentsImage, for: .normal)
@@ -28,7 +28,7 @@ class VkButtons: UIControl {
     
     @IBOutlet weak var commentsLabel: UILabel!
     
-    @IBOutlet weak var repostButton: UIButton! {
+    @IBOutlet private weak var repostButton: UIButton! {
         didSet {
             let repostImage = UIImage(named: "repost")
             self.repostButton.setImage(repostImage, for: .normal)
@@ -37,7 +37,7 @@ class VkButtons: UIControl {
     
     @IBOutlet weak var repostLabel: UILabel!
     
-    @IBOutlet weak var viewingButton: UIButton! {
+    @IBOutlet private weak var viewingButton: UIButton! {
         didSet {
             let viewingImage = UIImage(named: "viewing")
             self.viewingButton.setImage(viewingImage, for: .normal)
@@ -47,3 +47,8 @@ class VkButtons: UIControl {
     @IBOutlet weak var viewingLabel: UILabel!
     
 }
+
+
+
+
+

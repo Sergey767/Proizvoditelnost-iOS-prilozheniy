@@ -13,8 +13,8 @@ class SearchGroupCell: UITableViewCell {
     
     static let reuseIdentifier = "SearchGroupCell"
     
-    @IBOutlet weak var searchGroupName: UILabel!
-    @IBOutlet weak var searchGroupImageView: UIImageView!
+    @IBOutlet private weak var searchGroupName: UILabel!
+    @IBOutlet private weak var searchGroupImageView: UIImageView!
     
     public func configure(with searchGroup: SearchGroup) {
         

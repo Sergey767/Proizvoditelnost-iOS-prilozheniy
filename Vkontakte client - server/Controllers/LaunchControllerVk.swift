@@ -13,7 +13,7 @@ class LaunchControllerVk: UIViewController {
     
     //MARK: - Outlets
     
-    @IBOutlet weak var webview: WKWebView! {
+    @IBOutlet private weak var webview: WKWebView! {
         didSet {
             webview.navigationDelegate = self
         }

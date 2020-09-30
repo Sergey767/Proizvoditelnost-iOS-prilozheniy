@@ -25,7 +25,6 @@
 		4BDA954A22C7F54600A9E008 /* MyGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA954922C7F54600A9E008 /* MyGroupsViewController.swift */; };
 		4BDA954C22C7F5A500A9E008 /* SearchGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDA954B22C7F5A500A9E008 /* SearchGroupTableViewController.swift */; };
 		4BEBD3FF22D6387C00D02BF7 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEBD3FE22D6387C00D02BF7 /* MyFriendsCell.swift */; };
-		87280A7B2356604300111D0F /* SwipePhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87280A7A2356604300111D0F /* SwipePhotosController.swift */; };
 		8734112923746FB100543B9E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8734112823746FB100543B9E /* WebKit.framework */; };
 		8742812D2374BCCF0078CF70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8742812C2374BCCF0078CF70 /* NetworkService.swift */; };
 		87700B58235E6A3D0057EBF5 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87700B57235E6A3D0057EBF5 /* CustomAnimator.swift */; };
@@ -67,7 +66,6 @@
 		4BDA954B22C7F5A500A9E008 /* SearchGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroupTableViewController.swift; sourceTree = "<group>"; };
 		4BEBD3FE22D6387C00D02BF7 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
 		7807D2B6491ABA2F215B37C3 /* Pods_Vkontakte.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vkontakte.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		87280A7A2356604300111D0F /* SwipePhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipePhotosController.swift; sourceTree = "<group>"; };
 		8734112823746FB100543B9E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8742812C2374BCCF0078CF70 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		87700B57235E6A3D0057EBF5 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				4B8AC8B622B6957400BEE63D /* LaunchControllerVk.swift */,
 				4B3641F3231185AC0001535C /* MyFriendsViewController.swift */,
 				4BDA954722C7F41900A9E008 /* PhotoCollectionViewController.swift */,
-				87280A7A2356604300111D0F /* SwipePhotosController.swift */,
 				4BDA954922C7F54600A9E008 /* MyGroupsViewController.swift */,
 				4BDA954B22C7F5A500A9E008 /* SearchGroupTableViewController.swift */,
 				990A166B2502793C00D4EAF2 /* NewsViewController.swift */,
@@ -382,7 +379,6 @@
 				8742812D2374BCCF0078CF70 /* NetworkService.swift in Sources */,
 				4B3641F4231185AC0001535C /* MyFriendsViewController.swift in Sources */,
 				99071CC7250BA626004EA43D /* VKNews.swift in Sources */,
-				87280A7B2356604300111D0F /* SwipePhotosController.swift in Sources */,
 				4B0FA39722D7851600401B87 /* PhotoCell.swift in Sources */,
 				878AF8932387C73A00933BB9 /* PhotoModel.swift in Sources */,
 				990A166C2502793C00D4EAF2 /* NewsViewController.swift in Sources */,

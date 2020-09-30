@@ -70,14 +70,6 @@ class MyGroupsViewController: UITableViewController {
                     cell.myGroupsImageView.layer.add(animation, forKey: nil)
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editingRow = groups?[indexPath.row]
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _,_ in
@@ -87,34 +79,5 @@ class MyGroupsViewController: UITableViewController {
         }
         return [deleteAction]
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    // MARK: - Navigation
-    
-//    @IBAction func addGroup(segue: UIStoryboardSegue) {
-//            if let controller = segue.source as? SearchGroupViewController,
-//                let indexPath = controller.tableView.indexPathForSelectedRow {
-//                let group = controller.myGroups[indexPath.row]
-//
-//                guard !myGroups.contains(where: { $0.nameGroup == group.nameGroup } ) else {return}
-//
-//                myGroups.append(group)
-//                let newIndexPath = IndexPath(item: myGroups.count - 1, section: 0)
-//                tableView.insertRows(at: [newIndexPath], with: .automatic)
-//            }
-//    }
     
 }

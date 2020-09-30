@@ -13,7 +13,7 @@ class PhotoCell: UICollectionViewCell {
     
     static let reuseIdentifier = "PhotoCell"
     
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet private weak var photoImageView: UIImageView!
     
     public func configure(with photo: Photo) {
         

@@ -13,10 +13,15 @@ class ItemsProfiles {
     let profilesId: Int
     let firstName: String
     let lastName: String
+    let photo: String
+    let token: String
     
-    init(json: JSON) {
-        self.profilesId = json["profiles"]["id"].intValue
-        self.firstName = json["profiles"]["first_name"].stringValue
-        self.lastName = json["profiles"]["last_name"].stringValue
+    init(json: JSON, token: String) {
+        self.profilesId = json["id"].intValue
+        self.firstName = json["first_name"].stringValue
+        self.lastName = json["last_name"].stringValue
+        self.photo = json["photo_50"].stringValue
+        
+        self.token = token
     }
 }

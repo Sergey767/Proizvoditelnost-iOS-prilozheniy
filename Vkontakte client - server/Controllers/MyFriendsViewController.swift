@@ -11,15 +11,29 @@ import RealmSwift
 
 class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    
-    var publicTableView: UITableView {
-        tableView
-    }
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     let networkService = NetworkService()
     private var notificationToken: NotificationToken?
+    
+    var sortedIds = [[Int?]]()
+    var cashedFriendsIds = [Int?]()
+    private var searchText: String {
+        searchBar.text ?? ""
+    }
+    
+    var sortedFriends = [[User]]() {
+        didSet {
+            sortedIds = sortedFriends.map { $0.map { $0.id } }
+            
+            if let friends: Results<User> = try? RealmProvider.get(User.self) {
+                self.cashedFriendsIds = Array(friends).map { $0.id }
+            } else {
+                cashedFriendsIds.removeAll()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +46,15 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         
+        notification()
+    }
+    
+    
+    deinit {
+        notificationToken?.invalidate()
+    }
+    
+    private func notification() {
         notificationToken = filteredFriends?.observe { [weak self] change in
             guard let self = self else { return }
             switch change {
@@ -80,32 +103,11 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    deinit {
-        notificationToken?.invalidate()
-    }
     
     private var filteredFriends: Results<User>? {
         let friends: Results<User>? = try? RealmProvider.get(User.self)
         guard !searchText.isEmpty else { return friends }
         return friends?.filter("lastName CONTAINS[cd] %@", searchText)
-    }
-    
-    var sortedFriends = [[User]]() {
-        didSet {
-            sortedIds = sortedFriends.map { $0.map { $0.id } }
-            
-            if let friends: Results<User> = try? RealmProvider.get(User.self) {
-                self.cashedFriendsIds = Array(friends).map { $0.id }
-            } else {
-                cashedFriendsIds.removeAll()
-            }
-        }
-    }
-    
-    var sortedIds = [[Int?]]()
-    var cashedFriendsIds = [Int?]()
-    private var searchText: String {
-        searchBar.text ?? ""
     }
     
     private func sortFriends() {
@@ -139,7 +141,7 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sortFriends()
-        publicTableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Navigation

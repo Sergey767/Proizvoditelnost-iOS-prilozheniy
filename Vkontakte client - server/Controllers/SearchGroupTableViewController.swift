@@ -65,7 +65,7 @@ class SearchGroupTableViewController: UITableViewController {
     }
 }
 
-// MARK - UISearchBarDelegate
+    // MARK - UISearchBarDelegate
 extension SearchGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
