@@ -16,7 +16,7 @@ class NewsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.loadPostNews(token: Singleton.instance.token, completion: { [weak self] news, error in
+        networkService.loadNews(token: Singleton.instance.token, completion: { [weak self] news, error in
             guard error == nil else {
                 print("Some error in loading data")
                 return

@@ -8,18 +8,25 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
 
 class MyGroupsViewController: UITableViewController {
-    let netrworkService = NetworkService()
-    let realm = try! Realm()
+    
+    private let parseData = ParseData()
+    private let realm = try! Realm()
     private let groups = try? Realm().objects(Group.self)
     private var notificationToken: NotificationToken?
     
+    private let baseUrl = "https://api.vk.com"
+    private let versionAPI = "5.92"
+    private let path = "/method/groups.get"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        netrworkService.loadGroups(token: Singleton.instance.token) { [weak self] groups in
+        parseData.loadGroups(token: Singleton.instance.token) { [weak self] groups in
             try? RealmProvider.save(items: groups)
+            
         }
         
         notificationToken = groups?.observe { [weak self] change in
@@ -36,6 +43,30 @@ class MyGroupsViewController: UITableViewController {
 
         tableView.tableFooterView = UIView()
     }
+    
+    func asyncLoadData() {
+
+        let queue = OperationQueue()
+
+        let params: Parameters = [
+            "access_token": Singleton.instance.token,
+            "extended": 1,
+            "v": versionAPI
+        ]
+
+        let request = ParseData.session.request(baseUrl + path, method: .get, parameters: params)
+
+        let loadOperation = GetDataOperation(request: request)
+        queue.addOperation(loadOperation)
+
+        let parseData = ParseData()
+        parseData.addDependency(loadOperation)
+        queue.addOperation(parseData)
+        
+        let realmProvider = RealmProvider()
+        realmProvider.addDependency(parseData)
+        queue.addOperation(realmProvider)
+    }
         
     // MARK: - Table view data source
 
@@ -47,7 +78,7 @@ class MyGroupsViewController: UITableViewController {
         
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsCell
         
-        guard let group = groups?[indexPath.row] else { return  cell }
+        let group = (groups?[indexPath.row])!
         cell.configure(with: group)
             
             return cell
@@ -79,5 +110,4 @@ class MyGroupsViewController: UITableViewController {
         }
         return [deleteAction]
     }
-    
 }

@@ -15,16 +15,16 @@ class Group: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var photo: String = ""
     @objc dynamic var token: String = ""
-    
+
     convenience init(_ json: JSON, token: String) {
         self.init()
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
         self.photo = json["photo_50"].stringValue
-        
+
         self.token = token
     }
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }
@@ -43,6 +43,3 @@ class Group: Object {
 //    "photo_100": "https://sun7-7.userapi.com/c858128/v858128773/66fc6/gdBZmSFlYoo.jpg?ava=1",
 //    "photo_200": "https://sun7-8.userapi.com/c858128/v858128773/66fc5/DnvUj1jb5Fk.jpg?ava=1"
 //}
-
-
-

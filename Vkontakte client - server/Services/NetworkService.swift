@@ -21,29 +21,6 @@ class NetworkService {
         return session
     }()
 
-    func loadGroups(token: String, completion: @escaping ([Group]) -> Void) {
-        let path = "/method/groups.get"
-
-        let params: Parameters = [
-            "access_token": Singleton.instance.token,
-            "extended": 1,
-            "v": versionAPI
-        ]
-
-        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let groupJSONs = json["response"]["items"].arrayValue
-                let groups = groupJSONs.map { Group($0, token: token) }
-                completion(groups)
-            case .failure(let error):
-                print(error)
-                completion([])
-            }
-        }
-    }
-
     func loadFriends(token: String, completion: @escaping ([User]) -> Void) {
         let path = "/method/friends.get"
 
@@ -69,7 +46,7 @@ class NetworkService {
     
     func loadSearchGroups(searchQuery: String, completion: @escaping ([SearchGroup]) -> Void) {
         let path = "/method/groups.search"
-
+        
         let params: Parameters = [
             "access_token": Singleton.instance.token,
             "q": searchQuery,
@@ -117,7 +94,7 @@ class NetworkService {
         }
     }
     
-    func loadPostNews(token: String, completion: ((VKNews?, Error?) -> Void)? = nil) {
+    func loadNews(token: String, completion: ((VKNews?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [

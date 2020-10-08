@@ -40,8 +40,11 @@
 		990A166C2502793C00D4EAF2 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990A166B2502793C00D4EAF2 /* NewsViewController.swift */; };
 		9915501825011C3200FBECC5 /* PostNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9915501725011C3200FBECC5 /* PostNewsCell.swift */; };
 		9915501A25011C5000FBECC5 /* PhotoNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9915501925011C5000FBECC5 /* PhotoNewsCell.swift */; };
+		9937751525260EE40088F683 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937751425260EE40088F683 /* GetDataOperation.swift */; };
+		9937751A252666190088F683 /* ParseDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99377519252666190088F683 /* ParseDataOperation.swift */; };
 		9946F64E24D876F700D1DAC3 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9946F64D24D876F700D1DAC3 /* UITableView+Ext.swift */; };
 		9946F65024D8AADC00D1DAC3 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9946F64F24D8AADC00D1DAC3 /* UIViewController + Ext.swift */; };
+		996961E425248F1F00653D4E /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996961E325248F1F00653D4E /* AsyncOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,8 +83,11 @@
 		990A166B2502793C00D4EAF2 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		9915501725011C3200FBECC5 /* PostNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNewsCell.swift; sourceTree = "<group>"; };
 		9915501925011C5000FBECC5 /* PhotoNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNewsCell.swift; sourceTree = "<group>"; };
+		9937751425260EE40088F683 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
+		99377519252666190088F683 /* ParseDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDataOperation.swift; sourceTree = "<group>"; };
 		9946F64D24D876F700D1DAC3 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		9946F64F24D8AADC00D1DAC3 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
+		996961E325248F1F00653D4E /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		E40DB05F73555D840327420A /* Pods-Vkontakte.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vkontakte.release.xcconfig"; path = "Target Support Files/Pods-Vkontakte/Pods-Vkontakte.release.xcconfig"; sourceTree = "<group>"; };
 		F9AACE5AA2EC445028541B0D /* Pods-Vkontakte.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vkontakte.debug.xcconfig"; path = "Target Support Files/Pods-Vkontakte/Pods-Vkontakte.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +149,9 @@
 		4B8AC8A322B691F500BEE63D /* Vkontakte client - server */ = {
 			isa = PBXGroup;
 			children = (
+				996961E325248F1F00653D4E /* AsyncOperation.swift */,
+				9937751425260EE40088F683 /* GetDataOperation.swift */,
+				99377519252666190088F683 /* ParseDataOperation.swift */,
 				8742812B2374BC930078CF70 /* Services */,
 				9946F65124D9A48200D1DAC3 /* Extensions */,
 				878BE758237399580065DA59 /* Singleton */,
@@ -366,6 +375,7 @@
 				99071CCB2511680F004EA43D /* ItemsProfiles.swift in Sources */,
 				99071CCD25116874004EA43D /* ItemsGroups.swift in Sources */,
 				4B8AC8A522B691F500BEE63D /* AppDelegate.swift in Sources */,
+				996961E425248F1F00653D4E /* AsyncOperation.swift in Sources */,
 				4B8AC8B722B6957400BEE63D /* LaunchControllerVk.swift in Sources */,
 				4B0FA39B22D7C12F00401B87 /* SearchGroupCell.swift in Sources */,
 				878BE75A2373997C0065DA59 /* Singleton.swift in Sources */,
@@ -390,7 +400,9 @@
 				9915501A25011C5000FBECC5 /* PhotoNewsCell.swift in Sources */,
 				4BDA954A22C7F54600A9E008 /* MyGroupsViewController.swift in Sources */,
 				4BEBD3FF22D6387C00D02BF7 /* MyFriendsCell.swift in Sources */,
+				9937751525260EE40088F683 /* GetDataOperation.swift in Sources */,
 				9946F64E24D876F700D1DAC3 /* UITableView+Ext.swift in Sources */,
+				9937751A252666190088F683 /* ParseDataOperation.swift in Sources */,
 				4B0FA39D22D8D14200401B87 /* UserModel.swift in Sources */,
 				9915501825011C3200FBECC5 /* PostNewsCell.swift in Sources */,
 			);
