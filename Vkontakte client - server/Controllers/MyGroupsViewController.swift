@@ -26,7 +26,6 @@ class MyGroupsViewController: UITableViewController {
         
         parseData.loadGroups(token: Singleton.instance.token) { [weak self] groups in
             try? RealmProvider.save(items: groups)
-            
         }
         
         notificationToken = groups?.observe { [weak self] change in
@@ -40,12 +39,12 @@ class MyGroupsViewController: UITableViewController {
                 fatalError("\(error)")
             }
         }
-
+        
         tableView.tableFooterView = UIView()
     }
     
     func asyncLoadData() {
-
+        
         let queue = OperationQueue()
 
         let params: Parameters = [
@@ -63,9 +62,9 @@ class MyGroupsViewController: UITableViewController {
         parseData.addDependency(loadOperation)
         queue.addOperation(parseData)
         
-        let realmProvider = RealmProvider()
-        realmProvider.addDependency(parseData)
-        queue.addOperation(realmProvider)
+//        let realmProvider = RealmProvider()
+//        realmProvider.addDependency(parseData)
+//        queue.addOperation(realmProvider)
     }
         
     // MARK: - Table view data source

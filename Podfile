@@ -10,5 +10,6 @@ target 'Vkontakte' do
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'RealmSwift'
+  pod 'PromiseKit'
 
 end

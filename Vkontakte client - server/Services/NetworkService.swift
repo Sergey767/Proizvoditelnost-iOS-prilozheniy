@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class NetworkService {
     
@@ -20,29 +21,55 @@ class NetworkService {
         let session = Session(configuration: configuration)
         return session
     }()
-
-    func loadFriends(token: String, completion: @escaping ([User]) -> Void) {
+    
+    func getPromiseFriends(token: String) -> Promise<[User]> {
         let path = "/method/friends.get"
-
+        
         let params: Parameters = [
             "access_token": Singleton.instance.token,
             "fields": "nickname, photo_50, photo_100, photo_200_orig",
             "v": versionAPI
         ]
-
-        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let friendJSONs = json["response"]["items"].arrayValue
-                let friends = friendJSONs.map { User($0, token: token) }
-                completion(friends)
-            case .failure(let error):
-                print(error)
-                completion([])
+        
+        return Promise { resolver in
+            NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let friendJSONs = json["response"]["items"].arrayValue
+                    
+                    let friends = friendJSONs.map { User($0, token: token) }
+                    resolver.fulfill(friends)
+                    
+                case .failure(let error):
+                    resolver.reject(error)
+                }
             }
         }
     }
+
+//    func loadFriends(token: String, completion: @escaping ([User]) -> Void) {
+//        let path = "/method/friends.get"
+//
+//        let params: Parameters = [
+//            "access_token": Singleton.instance.token,
+//            "fields": "nickname, photo_50, photo_100, photo_200_orig",
+//            "v": versionAPI
+//        ]
+//
+//        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                let friendJSONs = json["response"]["items"].arrayValue
+//                let friends = friendJSONs.map { User($0, token: token) }
+//                completion(friends)
+//            case .failure(let error):
+//                print(error)
+//                completion([])
+//            }
+//        }
+//    }
     
     func loadSearchGroups(searchQuery: String, completion: @escaping ([SearchGroup]) -> Void) {
         let path = "/method/groups.search"

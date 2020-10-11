@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import PromiseKit
 
 class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     
@@ -38,8 +39,29 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.loadFriends(token: Singleton.instance.token) { [weak self] friends in
-            try? RealmProvider.save(items: friends)
+        func launchPromiseFriendsChain() {
+
+            firstly {
+                networkService.getPromiseFriends(token: Singleton.instance.token)
+            }
+
+                .get { [weak self] friends in
+                    try? RealmProvider.save(items: friends)
+                }
+                .then { [weak self] friends -> Promise<[User]> in
+                    guard let self = self else {
+                        return Promise(error: PMKError.cancelled)
+                    }
+
+                    let promise = self.networkService.getPromiseFriends(token: Singleton.instance.token)
+
+                    return promise
+                }
+                .catch { error in
+                    print(error)
+                }
+                .finally {
+                }
         }
         
         searchBar.delegate = self
@@ -48,8 +70,7 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
         
         notification()
     }
-    
-    
+
     deinit {
         notificationToken?.invalidate()
     }
