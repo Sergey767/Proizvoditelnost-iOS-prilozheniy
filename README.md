@@ -1,1 +1,0 @@
-# Proizvoditelnost-iOS-prilozheniy
