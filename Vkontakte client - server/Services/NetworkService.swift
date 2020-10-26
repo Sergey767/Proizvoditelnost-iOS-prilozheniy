@@ -47,29 +47,6 @@ class NetworkService {
             }
         }
     }
-
-//    func loadFriends(token: String, completion: @escaping ([User]) -> Void) {
-//        let path = "/method/friends.get"
-//
-//        let params: Parameters = [
-//            "access_token": Singleton.instance.token,
-//            "fields": "nickname, photo_50, photo_100, photo_200_orig",
-//            "v": versionAPI
-//        ]
-//
-//        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                let friendJSONs = json["response"]["items"].arrayValue
-//                let friends = friendJSONs.map { User($0, token: token) }
-//                completion(friends)
-//            case .failure(let error):
-//                print(error)
-//                completion([])
-//            }
-//        }
-//    }
     
     func loadSearchGroups(searchQuery: String, completion: @escaping ([SearchGroup]) -> Void) {
         let path = "/method/groups.search"
@@ -127,7 +104,7 @@ class NetworkService {
         let params: Parameters = [
             "access_token": Singleton.instance.token,
             "filters": "post, photo",
-            "count": 100,
+            "count": 20,
             "v": versionAPI
         ]
         
@@ -166,6 +143,61 @@ class NetworkService {
                 
             case .failure(let error):
                 completion?(nil, error)
+            }
+        }
+    }
+    
+    func loadPartNews(startFrom: String, token: String, completion: ((VKNews?, Error?, String?) -> Void)? = nil) {
+        let path = "/method/newsfeed.get"
+        
+        let params: Parameters = [
+            "access_token": Singleton.instance.token,
+            "start_from": startFrom,
+            "filters": "post, photo",
+            "count": 20,
+            "v": versionAPI
+        ]
+        
+        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global(qos: .utility)) {
+            response in
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                var postNews = [ItemsNews]()
+                var postProfilesNews = [ItemsProfiles]()
+                var postGroupsNews = [ItemsGroups]()
+                var nextFrom = ""
+                
+                let jsonParseGroup = DispatchGroup()
+                
+                DispatchQueue.global().async(group: jsonParseGroup) {
+                    postNews = json["response"]["items"].arrayValue.map { ItemsNews(json: $0, token: token) }
+                    postNews.forEach { print($0.text) }
+                }
+                
+                DispatchQueue.global().async(group: jsonParseGroup) {
+                    postGroupsNews = json["response"]["groups"].arrayValue.map { ItemsGroups(json: $0, token: token) }
+                    postGroupsNews.forEach { print($0.nameGroup) }
+                }
+                
+                DispatchQueue.global().async(group: jsonParseGroup) {
+                    postProfilesNews = json["response"]["profiles"].arrayValue.map { ItemsProfiles(json: $0, token: token) }
+                    postProfilesNews.forEach { print($0.firstName + " " + $0.lastName ) }
+                }
+                
+                    nextFrom = json["response"]["next_from"].stringValue
+                    Singleton.instance.nextFrom = nextFrom
+                    
+                
+                jsonParseGroup.notify(queue: DispatchQueue.main) {
+                    let news = VKNews(items: postNews, profiles: postProfilesNews, groups: postGroupsNews)
+                    completion?(news, nil, nextFrom)
+                }
+                
+            case .failure(let error):
+                completion?(nil, error, nil)
             }
         }
     }

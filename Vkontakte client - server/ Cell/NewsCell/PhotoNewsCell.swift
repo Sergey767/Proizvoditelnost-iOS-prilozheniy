@@ -16,9 +16,10 @@ class PhotoNewsCell: UITableViewCell {
     @IBOutlet weak var userNameNews: UILabel!
     @IBOutlet private weak var photoNews: UIImageView!
     @IBOutlet private weak var photoButtonView: VkButtons!
+    @IBOutlet private weak var newsImageHeightConstraint: NSLayoutConstraint!
     
     
-    func configure(with news: ItemsNews, ownerGroupNews: ItemsGroups?, ownerProfilesNews: ItemsProfiles?) {
+    func configure(with news: ItemsNews, ownerGroupNews: ItemsGroups?, ownerProfilesNews: ItemsProfiles?, photoHeight: CGFloat) {
         
         let urlPost = URL(string: news.photo)
         photoNews.kf.setImage(with: urlPost)
@@ -26,6 +27,7 @@ class PhotoNewsCell: UITableViewCell {
         photoButtonView.likeLabel?.text = news.likes
         photoButtonView.repostLabel?.text = news.reposts
         photoButtonView.viewingLabel?.text = news.views
+        newsImageHeightConstraint.constant = ceil(photoHeight)
     }
     
 

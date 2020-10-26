@@ -16,8 +16,8 @@ class MyGroupsCell: UITableViewCell {
     @IBOutlet private weak var groupsName: UILabel!
     @IBOutlet weak var myGroupsImageView: UIImageView!
     
-    public func configure(with group: Group) {
-
+    func configure(with group: Group) {
+        
         let name = group.name
         groupsName.text = name
         

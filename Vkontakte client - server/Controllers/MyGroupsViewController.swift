@@ -62,9 +62,9 @@ class MyGroupsViewController: UITableViewController {
         parseData.addDependency(loadOperation)
         queue.addOperation(parseData)
         
-//        let realmProvider = RealmProvider()
-//        realmProvider.addDependency(parseData)
-//        queue.addOperation(realmProvider)
+        let realmProvider = RealmProvider()
+        realmProvider.addDependency(parseData)
+        queue.addOperation(realmProvider)
     }
         
     // MARK: - Table view data source

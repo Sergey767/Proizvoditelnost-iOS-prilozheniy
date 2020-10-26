@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 
-//private let reuseIdentifier = "Cell"
-
 class PhotoCollectionViewController: UICollectionViewController {
     let networkService = NetworkService()
     private lazy var photos = try? Realm().objects(Photo.self).filter("userId == %@", userId)

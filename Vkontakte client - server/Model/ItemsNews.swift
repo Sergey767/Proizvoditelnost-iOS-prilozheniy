@@ -13,6 +13,8 @@ class ItemsNews {
     let sourceId: Int
     let text: String
     let photo: String
+    let photoHeight: Int
+    let photoWidth: Int
     let comments: String
     let likes: String
     let reposts: String
@@ -23,6 +25,8 @@ class ItemsNews {
         self.sourceId = json["source_id"].intValue
         self.text = json["text"].stringValue
         self.photo = json["attachments"][0]["photo"]["sizes"][0]["url"].stringValue
+        self.photoHeight = json["attachments"][0]["photo"]["sizes"][0]["height"].intValue
+        self.photoWidth = json["attachments"][0]["photo"]["sizes"][0]["width"].intValue
         self.comments = json["comments"]["count"].stringValue
         self.likes = json["likes"]["count"].stringValue
         self.reposts = json["reposts"]["count"].stringValue

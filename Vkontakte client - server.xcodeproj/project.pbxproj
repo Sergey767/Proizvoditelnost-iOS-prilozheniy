@@ -33,6 +33,7 @@
 		878BE75A2373997C0065DA59 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BE7592373997C0065DA59 /* Singleton.swift */; };
 		87DFAB9F23900FAB002E83FE /* PhotoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DFAB9E23900FAB002E83FE /* PhotoCollectionViewLayout.swift */; };
 		975F22831060271646475B55 /* Pods_Vkontakte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7807D2B6491ABA2F215B37C3 /* Pods_Vkontakte.framework */; };
+		9901A8D52535BEB5002FD57C /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9901A8D42535BEB5002FD57C /* PhotoService.swift */; };
 		99071CC1250BA29D004EA43D /* ItemsNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99071CC0250BA29D004EA43D /* ItemsNews.swift */; };
 		99071CC7250BA626004EA43D /* VKNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99071CC6250BA626004EA43D /* VKNews.swift */; };
 		99071CCB2511680F004EA43D /* ItemsProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99071CCA2511680F004EA43D /* ItemsProfiles.swift */; };
@@ -45,6 +46,7 @@
 		9946F64E24D876F700D1DAC3 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9946F64D24D876F700D1DAC3 /* UITableView+Ext.swift */; };
 		9946F65024D8AADC00D1DAC3 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9946F64F24D8AADC00D1DAC3 /* UIViewController + Ext.swift */; };
 		996961E425248F1F00653D4E /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996961E325248F1F00653D4E /* AsyncOperation.swift */; };
+		998640EA253CD37600F0E1D7 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998640E9253CD37600F0E1D7 /* FriendsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,7 @@
 		878AF8922387C73A00933BB9 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		878BE7592373997C0065DA59 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		87DFAB9E23900FAB002E83FE /* PhotoCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewLayout.swift; sourceTree = "<group>"; };
+		9901A8D42535BEB5002FD57C /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		99071CC0250BA29D004EA43D /* ItemsNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsNews.swift; sourceTree = "<group>"; };
 		99071CC6250BA626004EA43D /* VKNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNews.swift; sourceTree = "<group>"; };
 		99071CCA2511680F004EA43D /* ItemsProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsProfiles.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		9946F64D24D876F700D1DAC3 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		9946F64F24D8AADC00D1DAC3 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		996961E325248F1F00653D4E /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		998640E9253CD37600F0E1D7 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		E40DB05F73555D840327420A /* Pods-Vkontakte.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vkontakte.release.xcconfig"; path = "Target Support Files/Pods-Vkontakte/Pods-Vkontakte.release.xcconfig"; sourceTree = "<group>"; };
 		F9AACE5AA2EC445028541B0D /* Pods-Vkontakte.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vkontakte.debug.xcconfig"; path = "Target Support Files/Pods-Vkontakte/Pods-Vkontakte.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				4B0FA39C22D8D14200401B87 /* UserModel.swift */,
+				998640E9253CD37600F0E1D7 /* FriendsViewModel.swift */,
 				4B0FA39E22D8D17000401B87 /* GroupModel.swift */,
 				878AF8922387C73A00933BB9 /* PhotoModel.swift */,
 				3CE210AA240C47980096EE8D /* SearchGroupModel.swift */,
@@ -208,6 +213,7 @@
 				3C53E5992437D65500EEA8F7 /* RealmProvider.swift */,
 				8742812C2374BCCF0078CF70 /* NetworkService.swift */,
 				99071CC6250BA626004EA43D /* VKNews.swift */,
+				9901A8D42535BEB5002FD57C /* PhotoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -383,9 +389,11 @@
 				9946F65024D8AADC00D1DAC3 /* UIViewController + Ext.swift in Sources */,
 				456AE2E02333EE46001F42B5 /* VkButtons.swift in Sources */,
 				3CE210AB240C47980096EE8D /* SearchGroupModel.swift in Sources */,
+				998640EA253CD37600F0E1D7 /* FriendsViewModel.swift in Sources */,
 				99071CC1250BA29D004EA43D /* ItemsNews.swift in Sources */,
 				4BDA954822C7F41900A9E008 /* PhotoCollectionViewController.swift in Sources */,
 				4B0FA39F22D8D17000401B87 /* GroupModel.swift in Sources */,
+				9901A8D52535BEB5002FD57C /* PhotoService.swift in Sources */,
 				8742812D2374BCCF0078CF70 /* NetworkService.swift in Sources */,
 				4B3641F4231185AC0001535C /* MyFriendsViewController.swift in Sources */,
 				99071CC7250BA626004EA43D /* VKNews.swift in Sources */,

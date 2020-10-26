@@ -8,16 +8,15 @@
 
 import UIKit
 import RealmSwift
-import PromiseKit
 
 class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
     
-    let networkService = NetworkService()
     private var notificationToken: NotificationToken?
     
+    var friendsViewModel: FriendsViewModel? 
     var sortedIds = [[Int?]]()
     var cashedFriendsIds = [Int?]()
     private var searchText: String {
@@ -27,7 +26,7 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
     var sortedFriends = [[User]]() {
         didSet {
             sortedIds = sortedFriends.map { $0.map { $0.id } }
-            
+
             if let friends: Results<User> = try? RealmProvider.get(User.self) {
                 self.cashedFriendsIds = Array(friends).map { $0.id }
             } else {
@@ -36,41 +35,28 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    private var filteredFriends: Results<User>? {
+        let friends: Results<User>? = try? RealmProvider.get(User.self)
+        guard !searchText.isEmpty else { return friends }
+        return friends?.filter("lastName CONTAINS[cd] %@", searchText)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        func launchPromiseFriendsChain() {
+        let friendsViewModel = FriendsViewModel(networkService: NetworkService())
+        let myFriendsViewController = MyFriendsViewController()
+        myFriendsViewController.friendsViewModel = friendsViewModel
 
-            firstly {
-                networkService.getPromiseFriends(token: Singleton.instance.token)
-            }
-
-                .get { [weak self] friends in
-                    try? RealmProvider.save(items: friends)
-                }
-                .then { [weak self] friends -> Promise<[User]> in
-                    guard let self = self else {
-                        return Promise(error: PMKError.cancelled)
-                    }
-
-                    let promise = self.networkService.getPromiseFriends(token: Singleton.instance.token)
-
-                    return promise
-                }
-                .catch { error in
-                    print(error)
-                }
-                .finally {
-                }
-        }
+        friendsViewModel.launchPromiseFriendsChain()
+        
+        notification()
         
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        
-        notification()
     }
-
+    
     deinit {
         notificationToken?.invalidate()
     }
@@ -122,13 +108,6 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
                 self.show(error)
             }
         }
-    }
-    
-    
-    private var filteredFriends: Results<User>? {
-        let friends: Results<User>? = try? RealmProvider.get(User.self)
-        guard !searchText.isEmpty else { return friends }
-        return friends?.filter("lastName CONTAINS[cd] %@", searchText)
     }
     
     private func sortFriends() {

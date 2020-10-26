@@ -12,7 +12,7 @@ class NewsViewController: UITableViewController {
     
     private let networkService = NetworkService()
     var postNews: VKNews?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,18 +24,51 @@ class NewsViewController: UITableViewController {
             self?.postNews = news
             self?.tableView.reloadData()
         })
+        
+        setupRefreshControl()
+        
+        tableView.prefetchDataSource = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 200
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl?.tintColor = .gray
+        refreshControl?.addTarget(
+            self,
+            action: #selector(refreshNews),
+            for: .valueChanged
+        )
+        tableView.refreshControl = refreshControl
     }
 
+    @objc func refreshNews() {
+        refreshControl?.beginRefreshing()
+        
+        networkService.loadNews(token: Singleton.instance.token, completion: { [weak self] news, error in
+            guard error == nil else {
+                print("Some error in loading data")
+                return
+            }
+            self?.postNews = news
+            self?.tableView.reloadData()
+            self?.refreshControl?.endRefreshing()
+        })
+    }
+    
+    @objc func expandCollapse(sender: UIButton) {
+        self.tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postNews?.items.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(indexPath.row == 0) {
@@ -54,11 +87,13 @@ class NewsViewController: UITableViewController {
                 ownerProfilesNews!.firstName + " " + ownerProfilesNews!.lastName
             let ownerAvatarImage = ownerProfilesNews == nil ? ownerGroupNews?.photo : ownerProfilesNews?.photo
 
-            postCell.imageAvatarNews.kf.setImage(with: URL(string: (ownerAvatarImage)!))
+            postCell.imageAvatarNews.kf.setImage(with: URL(string: ownerAvatarImage ?? ""))
             postCell.imageAvatarNews.layer.cornerRadius = postCell.imageAvatarNews.frame.size.width / 2
             postCell.imageAvatarNews.clipsToBounds = true
 
             postCell.userNameNews.text = ownerName
+            
+            postCell.btnExpandCollepse.addTarget(self, action: #selector(NewsViewController.expandCollapse(sender:)), for: .touchUpInside)
             
             postCell.configure(with: postNews.items[indexPath.row], ownerGroupNews: ownerGroupNews, ownerProfilesNews: ownerProfilesNews)
                 return postCell
@@ -78,18 +113,62 @@ class NewsViewController: UITableViewController {
             
             let ownerAvatarImage = ownerProfilesNews == nil ? ownerGroupNews?.photo : ownerProfilesNews?.photo
             
-            photoCell.imageAvatarNews.kf.setImage(with: URL(string: ownerAvatarImage!))
+            var ratio: CGFloat = 1.0000
+            
+            let photoWidth = postNews.items[indexPath.row].photoWidth
+            let photoHeight = postNews.items[indexPath.row].photoHeight
+            
+            if photoHeight != 0 {
+                ratio = CGFloat(photoWidth) / CGFloat(photoHeight)
+            }
+            
+            let calcPhotoHeight = tableView.frame.width / ratio
+            
+            photoCell.imageAvatarNews.kf.setImage(with: URL(string: ownerAvatarImage ?? ""))
             photoCell.imageAvatarNews.layer.cornerRadius = photoCell.imageAvatarNews.frame.size.width / 2
             photoCell.imageAvatarNews.clipsToBounds = true
-
+            
             photoCell.userNameNews.text = ownerName
             
-            photoCell.configure(with: postNews.items[indexPath.row], ownerGroupNews: ownerGroupNews, ownerProfilesNews: ownerProfilesNews)
+            photoCell.configure(
+                with: postNews.items[indexPath.row],
+                ownerGroupNews: ownerGroupNews,
+                ownerProfilesNews: ownerProfilesNews,
+                photoHeight: calcPhotoHeight
+            )
             return photoCell
         }
     }
+}
+
+extension NewsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard indexPaths.contains(where: isLoadingCell(for:)) else {
+            return
+        }
+        
+            networkService.loadPartNews(
+                startFrom: Singleton.instance.nextFrom,
+                token: Singleton.instance.token,
+                completion: { [weak self] news, error, dateFrom in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.postNews?.items = (self.postNews?.items ?? []) + (news?.items ?? [])
+                    self.postNews?.groups = (self.postNews?.groups ?? []) + (news?.groups ?? [])
+                    self.postNews?.profiles = (self.postNews?.profiles ?? []) + (news?.profiles ?? [])
+                    
+                    self.tableView.reloadData()
+                }
+            )
+    }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+    }
+
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        let newsCount = postNews?.items.count ?? 0
+        return indexPath.row == newsCount - 3
     }
 }
