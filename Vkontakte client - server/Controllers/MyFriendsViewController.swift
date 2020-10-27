@@ -150,10 +150,10 @@ class MyFriendsViewController: UIViewController, UISearchBarDelegate {
         if segue.identifier == "PhotoSegue",
             let photoController = segue.destination as? PhotoCollectionViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-            
+
             let friendValues = sortedFriends[indexPath.section]
             let friend = friendValues[indexPath.row]
-            
+
             photoController.userId = friend.id
             photoController.friendTitle = friend.firstName + " " + friend.lastName
         }

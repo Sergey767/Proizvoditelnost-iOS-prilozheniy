@@ -73,7 +73,7 @@ class NetworkService {
     
     func fetchPhotos(for userId: Int, completion: @escaping ([Photo]) -> Void) {
         let path = "/method/photos.getAll"
-        
+
         let params: Parameters = [
             "access_token": Singleton.instance.token,
             "owner_id": String(userId),
@@ -81,10 +81,10 @@ class NetworkService {
             "count": 100,
             "v": versionAPI
         ]
-        
+
         NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseJSON {
             response in
-            
+
             switch response.result {
             case .success(let value):
                 let json = JSON(value)

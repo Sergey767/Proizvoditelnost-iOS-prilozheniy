@@ -19,6 +19,8 @@ class LaunchControllerVk: UIViewController {
         }
     }
     
+    let networkService = NetworkService()
+    
     //MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -75,7 +77,16 @@ extension LaunchControllerVk: WKNavigationDelegate {
         Singleton.instance.token = token
         Singleton.instance.userId = userId
         
+        showUserPhotos()
+        
         performSegue(withIdentifier: "segueFriends", sender: nil)
         decisionHandler(.cancel)
+    }
+    
+    private func showUserPhotos() {
+        let photosVC = PhotoCollectionViewController(networkService: NetworkService())
+        photosVC.modalTransitionStyle = .crossDissolve
+        photosVC.modalPresentationStyle = .overFullScreen
+        present(photosVC, animated: false)
     }
 }
