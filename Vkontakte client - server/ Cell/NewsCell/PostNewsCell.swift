@@ -33,7 +33,7 @@ class PostNewsCell: UITableViewCell {
         }
     }
     
-    func configure(with news: ItemsNews, ownerGroupNews: ItemsGroups?, ownerProfilesNews: ItemsProfiles?) {
+    func configure(with news: ItemsNews) {
         postNewsLabel.text = news.text
         postButtonView.commentsLabel?.text = news.comments
         postButtonView.likeLabel?.text = news.likes

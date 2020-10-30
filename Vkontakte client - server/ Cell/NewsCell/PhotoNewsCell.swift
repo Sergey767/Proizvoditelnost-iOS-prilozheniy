@@ -19,7 +19,7 @@ class PhotoNewsCell: UITableViewCell {
     @IBOutlet private weak var newsImageHeightConstraint: NSLayoutConstraint!
     
     
-    func configure(with news: ItemsNews, ownerGroupNews: ItemsGroups?, ownerProfilesNews: ItemsProfiles?, photoHeight: CGFloat) {
+    func configure(with news: ItemsNews, photoHeight: CGFloat) {
         
         let urlPost = URL(string: news.photo)
         photoNews.kf.setImage(with: urlPost)

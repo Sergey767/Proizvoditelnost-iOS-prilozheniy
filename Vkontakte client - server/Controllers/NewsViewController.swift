@@ -95,7 +95,7 @@ class NewsViewController: UITableViewController {
             
             postCell.btnExpandCollepse.addTarget(self, action: #selector(NewsViewController.expandCollapse(sender:)), for: .touchUpInside)
             
-            postCell.configure(with: postNews.items[indexPath.row], ownerGroupNews: ownerGroupNews, ownerProfilesNews: ownerProfilesNews)
+            postCell.configure(with: postNews.items[indexPath.row])
                 return postCell
             
         } else {
@@ -132,8 +132,6 @@ class NewsViewController: UITableViewController {
             
             photoCell.configure(
                 with: postNews.items[indexPath.row],
-                ownerGroupNews: ownerGroupNews,
-                ownerProfilesNews: ownerProfilesNews,
                 photoHeight: calcPhotoHeight
             )
             return photoCell
