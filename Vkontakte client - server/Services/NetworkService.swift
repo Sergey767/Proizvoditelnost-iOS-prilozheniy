@@ -14,7 +14,7 @@ import PromiseKit
 class NetworkService {
     
     private let baseUrl = "https://api.vk.com"
-    private let versionAPI = "5.92"
+    private let versionAPI = "5.102"
     
     static let session: Session = {
         let configuration = URLSessionConfiguration.default

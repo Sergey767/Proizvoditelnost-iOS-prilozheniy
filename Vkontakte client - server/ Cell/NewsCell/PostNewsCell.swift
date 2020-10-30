@@ -40,5 +40,4 @@ class PostNewsCell: UITableViewCell {
         postButtonView.repostLabel?.text = news.reposts
         postButtonView.viewingLabel?.text = news.views
     }
-    
 }

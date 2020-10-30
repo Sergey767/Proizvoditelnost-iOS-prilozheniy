@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -83,58 +83,6 @@
             </objects>
             <point key="canvasLocation" x="5671.0144927536239" y="653.57142857142856"/>
         </scene>
-        <!--Photo Collection View Controller-->
-        <scene sceneID="Ehd-vT-VEw">
-            <objects>
-                <collectionViewController id="e9n-DV-HDr" customClass="PhotoCollectionViewController" customModule="Vkontakte" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8uY-cx-mhj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7Lp-NE-y14">
-                            <size key="itemSize" width="166" height="162"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="635-56-Z8k" customClass="PhotoCell" customModule="Vkontakte" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="166" height="162"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="166" height="162"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yd7-Id-D0d">
-                                            <rect key="frame" x="10" y="8" width="146" height="146"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="146" id="EUw-mg-Twc"/>
-                                                <constraint firstAttribute="height" constant="146" id="XEm-2l-hWD"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="yd7-Id-D0d" firstAttribute="centerY" secondItem="635-56-Z8k" secondAttribute="centerY" id="Zjp-b0-Ouj"/>
-                                    <constraint firstItem="yd7-Id-D0d" firstAttribute="centerX" secondItem="635-56-Z8k" secondAttribute="centerX" id="ceZ-9i-Mxf"/>
-                                </constraints>
-                                <size key="customSize" width="166" height="162"/>
-                                <connections>
-                                    <outlet property="photoImageView" destination="yd7-Id-D0d" id="HOm-bB-Fcj"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="e9n-DV-HDr" id="yis-Rc-Zuc"/>
-                            <outlet property="delegate" destination="e9n-DV-HDr" id="AeY-4w-QQb"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="Gsc-74-cl9"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OwX-r8-XTB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6321.739130434783" y="-755.35714285714278"/>
-        </scene>
         <!--Друзья-->
         <scene sceneID="YFG-xa-ITc">
             <objects>
@@ -211,7 +159,7 @@
                                         <connections>
                                             <outlet property="friendsName" destination="VyU-bT-Vbl" id="bX3-cM-dZV"/>
                                             <outlet property="imageAvatar" destination="flX-N4-5JV" id="8g6-55-SOK"/>
-                                            <segue destination="e9n-DV-HDr" kind="show" identifier="PhotoSegue" id="dhb-JG-Pms"/>
+                                            <segue destination="J6e-sy-59S" kind="show" identifier="PhotoSegue" id="4Gy-qS-tB6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -245,6 +193,22 @@
                 <exit id="Tgw-qA-jgB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5553.6231884057979" y="-360.26785714285711"/>
+        </scene>
+        <!--Photo Collection View Controller-->
+        <scene sceneID="8xQ-OE-S4A">
+            <objects>
+                <viewController id="J6e-sy-59S" customClass="PhotoCollectionViewController" customModule="Vkontakte" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sNp-e6-Dtf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ASS-IP-pKG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LH4-ds-UU4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EBk-6K-Ogu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6351" y="-624"/>
         </scene>
         <!--Группы-->
         <scene sceneID="R5L-bI-ij7">

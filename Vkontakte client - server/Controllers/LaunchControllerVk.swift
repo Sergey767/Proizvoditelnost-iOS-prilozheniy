@@ -36,7 +36,7 @@ class LaunchControllerVk: UIViewController {
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.92")
+            URLQueryItem(name: "v", value: "5.102")
         ]
         
         let request = URLRequest(url: components.url!)
@@ -77,9 +77,8 @@ extension LaunchControllerVk: WKNavigationDelegate {
         Singleton.instance.token = token
         Singleton.instance.userId = userId
         
-        showUserPhotos()
-        
         performSegue(withIdentifier: "segueFriends", sender: nil)
+        showUserPhotos()
         decisionHandler(.cancel)
     }
     

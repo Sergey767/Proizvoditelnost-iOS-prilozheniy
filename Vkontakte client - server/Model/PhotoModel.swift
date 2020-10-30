@@ -11,7 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 protocol ImageNodeRepresentable {
-    
+
     var urlString: String { get }
     var aspectRatio: CGFloat { get }
 }
@@ -23,7 +23,7 @@ class Photo: Object, ImageNodeRepresentable {
     @objc dynamic var width: Double = 0.0
     @objc dynamic var height: Double = 0.0
     @objc dynamic var userId: Int = 0
-    var aspectRatio: CGFloat { return CGFloat(height) / CGFloat(width)}
+    var aspectRatio: CGFloat { return CGFloat(height) / CGFloat(width) }
     
     var friends = LinkingObjects(fromType: User.self, property: "photos")
     

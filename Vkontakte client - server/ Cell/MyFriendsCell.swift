@@ -13,22 +13,21 @@ class MyFriendsCell: UITableViewCell {
     
     static let reuseIdentifier = "MyFriendsCell"
     
-    @IBOutlet private weak var friendsName: UILabel! //{
-//        didSet {
-//            friendsName.translatesAutoresizingMaskIntoConstraints = false
-//        }
-//    }
+    @IBOutlet private weak var friendsName: UILabel!
     
-    @IBOutlet private weak var imageAvatar: UIImageView! //{
-//        didSet {
-//            imageAvatar.translatesAutoresizingMaskIntoConstraints = false
-//        }
-//    }
+    @IBOutlet private weak var imageAvatar: UIImageView!
     
     let instetsImageX: CGFloat = 20
     let instetsY: CGFloat = 14.5
     let instetsLabelRightX: CGFloat = 74
     let instetsLabelLeftX: CGFloat = 85
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
+        imageAvatar.clipsToBounds = true
+    }
     
     override func layoutSubviews() {
         friendsNameLabelFrame()
@@ -86,8 +85,6 @@ class MyFriendsCell: UITableViewCell {
         
         let url = URL(string: friend.avatar)
         imageAvatar.kf.setImage(with: url)
-        imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
-        imageAvatar.clipsToBounds = true
     }
     
     private func setFriendsName(text: String) {

@@ -11,13 +11,10 @@ import RealmSwift
 import AsyncDisplayKit
 
 class PhotoCollectionViewController: ASDKViewController<ASCollectionNode> {
-    
-    var collectionNode: ASCollectionNode {
-        return node
-    }
+    let collectionNode = ASCollectionNode(collectionViewLayout: UICollectionViewFlowLayout())
     
     var networkService = NetworkService()
-//    private lazy var photos = try? Realm().objects(Photo.self).filter("userId == %@", userId)
+    //private lazy var photos = try? Realm().objects(Photo.self).filter("userId == %@", userId ?? 0)
     var photos = [Photo]()
     private var notificationToken: NotificationToken?
     
@@ -26,18 +23,16 @@ class PhotoCollectionViewController: ASDKViewController<ASCollectionNode> {
     
     init(networkService: NetworkService) {
         self.networkService = networkService
-        var collectionNode = ASCollectionNode(collectionViewLayout: UICollectionViewFlowLayout())
         super.init(node: collectionNode)
         
         self.collectionNode.delegate = self
         self.collectionNode.dataSource = self
         
         self.collectionNode.allowsSelection = true
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError()
+    required init?(coder aDecoder: NSCoder) {
+       super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -47,17 +42,15 @@ class PhotoCollectionViewController: ASDKViewController<ASCollectionNode> {
 //                try? RealmProvider.save(items: photos)
 //            }
 //        }
-        
+//
         if let userId = userId {
             networkService.fetchPhotos(for: userId) { [weak self] photos in
                 self?.photos = photos
                 self?.collectionNode.reloadData()
             }
         }
-        
-        //collectionNode.reloadData()
 
-//        notificationToken = photos?.observe { [weak self] change in
+//        notificationToken = photos.observe { [weak self] change in
 //            guard let self = self else { return }
 //            switch change {
 //            case .initial:
@@ -71,9 +64,6 @@ class PhotoCollectionViewController: ASDKViewController<ASCollectionNode> {
 
         self.title = friendTitle
     }
-    
-        
-
 }
 
 extension PhotoCollectionViewController: ASCollectionDelegate {
@@ -93,8 +83,7 @@ extension PhotoCollectionViewController: ASCollectionDataSource {
         let photo = photos[indexPath.row]
         
         let cellNodeBlock = { () -> ASCellNode in
-            let cellNode = PhotoNode(resource: photo as! ImageNodeRepresentable)
-            //cellNode.delegate = self
+            let cellNode = PhotoNode(resource: photo)
             return cellNode
         }
         return cellNodeBlock

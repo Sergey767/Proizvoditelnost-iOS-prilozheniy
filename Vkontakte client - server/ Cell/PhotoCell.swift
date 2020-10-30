@@ -15,18 +15,20 @@ class PhotoNode: ASCellNode {
     private let photoImageNode = ASNetworkImageNode()
     private let resource: ImageNodeRepresentable
     
-    init(resource: ImageNodeRepresentable) {
+    init(resource: Photo) {
         self.resource = resource
         super.init()
+        backgroundColor = UIColor.red
         
         setupSabnodes()
     }
     
     private func setupSabnodes() {
-        addSubnode(photoImageNode)
-        //photoImageNode.url = resource.urlString
+        photoImageNode.url = URL(string: resource.urlString)
         photoImageNode.contentMode = .scaleToFill
+        photoImageNode.shouldRenderProgressImages = true
         
+        addSubnode(photoImageNode)
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

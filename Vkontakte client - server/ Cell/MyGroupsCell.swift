@@ -16,6 +16,11 @@ class MyGroupsCell: UITableViewCell {
     @IBOutlet private weak var groupsName: UILabel!
     @IBOutlet weak var myGroupsImageView: UIImageView!
     
+    override func awakeFromNib() {
+        myGroupsImageView.layer.cornerRadius = myGroupsImageView.frame.size.width / 2
+        myGroupsImageView.clipsToBounds = true
+    }
+    
     func configure(with group: Group) {
         
         let name = group.name
@@ -23,7 +28,5 @@ class MyGroupsCell: UITableViewCell {
         
         let url = URL(string: group.photo)
         myGroupsImageView.kf.setImage(with: url)
-        myGroupsImageView.layer.cornerRadius = myGroupsImageView.frame.size.width / 2
-        myGroupsImageView.clipsToBounds = true
     }
 }
